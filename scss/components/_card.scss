@@ -12,6 +12,7 @@
     height: 100%;
     width: 100%;
     transition: all 0.8s ease;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 3px;
     overflow: hidden;

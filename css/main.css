@@ -210,6 +210,7 @@ body {
     height: 100%;
     width: 100%;
     transition: all 0.8s ease;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 3px;
     overflow: hidden;
@@ -545,11 +546,15 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 2500;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s; }
+  @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    .popup {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.3); } }
   .popup__content {
     position: absolute;
     top: 50%;
@@ -581,7 +586,9 @@ body {
     @media (max-width: 56.25em) {
       .popup__left {
         width: 50%;
-        display: flex; } }
+        display: flex;
+        min-height: 100px;
+        max-height: 180px; } }
   .popup__right {
     width: 66.666667%;
     display: table-cell;
@@ -636,7 +643,7 @@ body {
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative; }
-  @media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em), (min-width: 125em) {
     .header {
       background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url("../img/hero.jpg"); } }
   @media (max-width: 37.5em) {
@@ -796,6 +803,7 @@ body {
   z-index: 1500;
   opacity: 0;
   width: 0;
+  pointer-events: none;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
 .navigation__list {
   position: absolute;
@@ -829,7 +837,8 @@ body {
   transform: scale(80); }
 .navigation__checkbox:checked ~ .navigation__nav {
   opacity: 1;
-  width: 100%; }
+  width: 100%;
+  pointer-events: visible; }
 .navigation__icon {
   position: relative;
   margin-top: 3.5rem; }
